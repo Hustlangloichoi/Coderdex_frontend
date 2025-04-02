@@ -1,5 +1,5 @@
 import { SearchOutlined } from "@mui/icons-material";
-import { Stack, Container, Grid, Typography, Button } from "@mui/material";
+import { Stack, Container, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -79,13 +79,7 @@ export const SearchBox = () => {
             <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
               <Stack direction="row" alignItems="center" spacing={2}>
                 <FTextField name="search" sx={styles.inputText} />
-                <Button
-                  sx={styles.icon}
-                  onClick={handleSubmit(onSubmit)} // Submit the form when clicked
-                  type="submit"
-                >
-                  <SearchOutlined sx={{ color: "white" }} />
-                </Button>
+                <SearchOutlined sx={styles.icon} />
               </Stack>
             </FormProvider>
             <Typography>
