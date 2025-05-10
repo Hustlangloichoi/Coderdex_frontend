@@ -7,7 +7,7 @@ export const getPokemons = createAsyncThunk(
   async ({ page, search, type }, { rejectWithValue }) => {
     try {
       let url = `/pokemons?page=${page}&limit=${POKEMONS_PER_PAGE}`;
-      if (search) url += `&search=${search}`;
+      if (search) url += `&name=${search}`; // changed from &search= to &name=
       if (type) url += `&type=${type}`;
       const response = await apiService.get(url);
       const timeout = () => {
@@ -18,7 +18,7 @@ export const getPokemons = createAsyncThunk(
         });
       };
       await timeout();
-      return response.data.data;
+      return response.data; // changed from response.data.data to response.data
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -132,6 +132,7 @@ export const pokemonSlice = createSlice({
     },
     [getPokemons.fulfilled]: (state, action) => {
       state.loading = false;
+       console.log("getPokemons.fulfilled payload:", action.payload);
       const { search, type } = state;
       if ((search || type) && state.page === 1) {
         state.pokemons = action.payload;
