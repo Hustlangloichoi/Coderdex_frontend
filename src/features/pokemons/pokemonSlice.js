@@ -18,7 +18,7 @@ export const getPokemons = createAsyncThunk(
         });
       };
       await timeout();
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return rejectWithValue(error);
     }
